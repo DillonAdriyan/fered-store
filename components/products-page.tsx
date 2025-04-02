@@ -1,6 +1,10 @@
 "use client"
 
+<<<<<<< HEAD
 import { useState, useCallback, memo } from "react"
+=======
+import { useState } from "react"
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
 import { ChevronDown, Smartphone, Wallet, Wifi, GamepadIcon as GameController } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -18,6 +22,7 @@ interface ProductsPageProps {
   onProceedToCheckout: (product: any, topupOption: any, paymentMethod: any, userId: string) => void
 }
 
+<<<<<<< HEAD
 // Memoize the TopupOption component to prevent unnecessary re-renders
 const TopupOption = memo(
   ({
@@ -88,6 +93,8 @@ const PaymentMethod = memo(
 )
 PaymentMethod.displayName = "PaymentMethod"
 
+=======
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
 export default function ProductsPage({
   product,
   productType,
@@ -101,15 +108,25 @@ export default function ProductsPage({
   const [userId, setUserId] = useState("")
   const [phoneNumber, setPhoneNumber] = useState("")
 
+<<<<<<< HEAD
   const formatPrice = useCallback((price: number) => {
+=======
+  const formatPrice = (price: number) => {
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
       minimumFractionDigits: 0,
     }).format(price)
+<<<<<<< HEAD
   }, [])
 
   const handleProceedToCheckout = useCallback(() => {
+=======
+  }
+
+  const handleProceedToCheckout = () => {
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     if (selectedOption && selectedPayment) {
       const topupOption = topupOptions.find((o) => o.id === selectedOption)
       const paymentMethod = paymentMethods.find((m) => m.id === selectedPayment)
@@ -118,6 +135,7 @@ export default function ProductsPage({
         onProceedToCheckout(product, topupOption, paymentMethod, userIdentifier)
       }
     }
+<<<<<<< HEAD
   }, [
     selectedOption,
     selectedPayment,
@@ -132,6 +150,12 @@ export default function ProductsPage({
 
   // Get the appropriate icon based on product type
   const getProductIcon = useCallback(() => {
+=======
+  }
+
+  // Get the appropriate icon based on product type
+  const getProductIcon = () => {
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     switch (productType) {
       case "game":
         return <GameController className="h-6 w-6" />
@@ -144,10 +168,17 @@ export default function ProductsPage({
       default:
         return <GameController className="h-6 w-6" />
     }
+<<<<<<< HEAD
   }, [productType])
 
   // Get the appropriate label based on product type
   const getUserIdLabel = useCallback(() => {
+=======
+  }
+
+  // Get the appropriate label based on product type
+  const getUserIdLabel = () => {
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     switch (productType) {
       case "game":
         return "User ID"
@@ -160,10 +191,17 @@ export default function ProductsPage({
       default:
         return "User ID"
     }
+<<<<<<< HEAD
   }, [productType])
 
   // Get the appropriate placeholder based on product type
   const getUserIdPlaceholder = useCallback(() => {
+=======
+  }
+
+  // Get the appropriate placeholder based on product type
+  const getUserIdPlaceholder = () => {
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     switch (productType) {
       case "game":
         return "Enter your game ID"
@@ -176,10 +214,17 @@ export default function ProductsPage({
       default:
         return "Enter your ID"
     }
+<<<<<<< HEAD
   }, [productType])
 
   // Get the appropriate helper text based on product type
   const getUserIdHelperText = useCallback(() => {
+=======
+  }
+
+  // Get the appropriate helper text based on product type
+  const getUserIdHelperText = () => {
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     switch (productType) {
       case "game":
         return "Enter your game ID to receive the top-up"
@@ -192,10 +237,17 @@ export default function ProductsPage({
       default:
         return "Enter your ID to receive the top-up"
     }
+<<<<<<< HEAD
   }, [productType])
 
   // Get the appropriate title based on product type
   const getTitle = useCallback(() => {
+=======
+  }
+
+  // Get the appropriate title based on product type
+  const getTitle = () => {
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     switch (productType) {
       case "game":
         return "Game Top-Up"
@@ -208,7 +260,11 @@ export default function ProductsPage({
       default:
         return "Top-Up"
     }
+<<<<<<< HEAD
   }, [productType])
+=======
+  }
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
 
   return (
     <div className="container px-4 py-6">
@@ -222,6 +278,7 @@ export default function ProductsPage({
           <div className="flex items-center gap-4 mb-6">
             {product.image ? (
               <div className="relative h-16 w-16 overflow-hidden rounded-lg">
+<<<<<<< HEAD
                 <Image
                   src={product.image || "/placeholder.svg"}
                   alt={product.name}
@@ -229,6 +286,9 @@ export default function ProductsPage({
                   className="object-cover"
                   sizes="64px"
                 />
+=======
+                <Image src={product.image || "/placeholder.svg"} alt={product.name} fill className="object-cover" />
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
               </div>
             ) : (
               <div className={`h-16 w-16 rounded-lg ${product.color || "bg-primary"} flex items-center justify-center`}>
@@ -275,6 +335,7 @@ export default function ProductsPage({
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
               {topupOptions.map((option) => (
+<<<<<<< HEAD
                 <TopupOption
                   key={option.id}
                   option={option}
@@ -282,6 +343,32 @@ export default function ProductsPage({
                   onClick={() => setSelectedOption(option.id)}
                   formatPrice={formatPrice}
                 />
+=======
+                <div
+                  key={option.id}
+                  className={cn(
+                    "cursor-pointer rounded-lg border p-4 transition-colors",
+                    selectedOption === option.id ? "border-primary bg-primary/5" : "hover:border-primary/50",
+                  )}
+                  onClick={() => setSelectedOption(option.id)}
+                >
+                  <div className="font-medium">{option.name}</div>
+                  {option.description && <p className="text-xs text-muted-foreground mt-1">{option.description}</p>}
+                  <div className="mt-1 flex items-center gap-2">
+                    {option.discount > 0 && (
+                      <span className="text-xs line-through text-muted-foreground">
+                        {formatPrice(option.price * (1 + option.discount / 100))}
+                      </span>
+                    )}
+                    <span className="text-sm font-medium">{formatPrice(option.price)}</span>
+                  </div>
+                  {option.discount > 0 && (
+                    <div className="mt-1 inline-block rounded-full bg-green-100 px-2 py-0.5 text-xs font-medium text-green-800">
+                      {option.discount}% OFF
+                    </div>
+                  )}
+                </div>
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
               ))}
             </div>
           </div>
@@ -290,12 +377,31 @@ export default function ProductsPage({
             <h2 className="text-lg font-medium mb-4">3. Select Payment Method</h2>
             <div className="space-y-3">
               {paymentMethods.map((method) => (
+<<<<<<< HEAD
                 <PaymentMethod
                   key={method.id}
                   method={method}
                   isSelected={selectedPayment === method.id}
                   onClick={() => setSelectedPayment(method.id)}
                 />
+=======
+                <div
+                  key={method.id}
+                  className={cn(
+                    "flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors",
+                    selectedPayment === method.id ? "border-primary bg-primary/5" : "hover:border-primary/50",
+                  )}
+                  onClick={() => setSelectedPayment(method.id)}
+                >
+                  <div className="flex h-10 w-10 items-center justify-center rounded-md bg-muted">
+                    <method.icon className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className="font-medium">{method.name}</div>
+                    <p className="text-xs text-muted-foreground">{method.description}</p>
+                  </div>
+                </div>
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
               ))}
             </div>
           </div>

@@ -1,7 +1,11 @@
 "use client"
 
+<<<<<<< HEAD
 import dynamic from "next/dynamic"
 import { useState, useCallback, useMemo } from "react"
+=======
+import { useState } from "react"
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
 import {
   Bell,
   CreditCard,
@@ -36,6 +40,7 @@ import {
 } from "@/components/ui/sidebar"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
+<<<<<<< HEAD
 
 // Dynamically import components that aren't needed for initial render
 const BannerCarousel = dynamic(() => import("./banner-carousel"), {
@@ -52,6 +57,11 @@ const ProductsPage = dynamic(() => import("./products-page"), {
   ssr: false,
   loading: () => <div className="p-8 text-center">Loading product details...</div>,
 })
+=======
+import BannerCarousel from "./banner-carousel"
+import CheckoutPage from "./checkout-page"
+import ProductsPage from "./products-page"
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
 
 // Product categories
 const productCategories = [
@@ -76,37 +86,61 @@ const popularGames = [
   {
     id: 1,
     name: "Mobile Legends",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
+=======
+    image: "/logo/mlbb.webp",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     category: "MOBA",
   },
   {
     id: 2,
     name: "PUBG Mobile",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
+=======
+    image: "/logo/pubg.webp",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     category: "Battle Royale",
   },
   {
     id: 3,
     name: "Genshin Impact",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
+=======
+    image: "/logo/gensin.webp",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     category: "RPG",
   },
   {
     id: 4,
     name: "Free Fire",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
+=======
+    image: "/logo/ff.webp",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     category: "Battle Royale",
   },
   {
     id: 5,
     name: "Call of Duty Mobile",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
+=======
+    image: "/logo/codm.webp",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     category: "FPS",
   },
   {
     id: 6,
     name: "Valorant",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
+=======
+    image: "/logo/valorant.webp",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     category: "FPS",
   },
 ]
@@ -116,36 +150,61 @@ const ewalletOptions = [
   {
     id: 1,
     name: "GoPay",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-blue-500",
+=======
+    image: "/logo/gopay.webp",
+    color: "blue-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Wallet,
   },
   {
     id: 2,
     name: "OVO",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-purple-500",
+=======
+    image: "/logo/ovo.webp",
+    color: "purple-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Wallet,
   },
   {
     id: 3,
     name: "DANA",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-blue-400",
+=======
+    image: "/logo/dana.webp",
+    color: "blue-400",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Wallet,
   },
   {
     id: 4,
     name: "LinkAja",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-red-500",
+=======
+    image: "/logo/linkaja.webp",
+    color: "red-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Wallet,
   },
   {
     id: 5,
     name: "ShopeePay",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-orange-500",
+=======
+    image: "/logo/shopepay.webp",
+    color: "orange-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Wallet,
   },
 ]
@@ -155,36 +214,61 @@ const dataProviders = [
   {
     id: 1,
     name: "Telkomsel",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-red-500",
+=======
+    image: "/logo/telkomsel.webp",
+    color: "red-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Wifi,
   },
   {
     id: 2,
     name: "XL",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-blue-500",
+=======
+    image: "/logo/xl.webp",
+    color: "blue-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Wifi,
   },
   {
     id: 3,
     name: "Indosat",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-yellow-500",
+=======
+    image: "/logo/indosat.webp",
+    color: "yellow-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Wifi,
   },
   {
     id: 4,
     name: "Tri",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-purple-500",
+=======
+    image: "/logo/tri.webp",
+    color: "purple-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Wifi,
   },
   {
     id: 5,
     name: "Smartfren",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-red-600",
+=======
+    image: "/logo/smartfren.webp",
+    color: "red-600",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Wifi,
   },
 ]
@@ -193,37 +277,63 @@ const dataProviders = [
 const pulsaProviders = [
   {
     id: 1,
+<<<<<<< HEAD
     name: "Telkomsel",
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-red-500",
+=======
+    image: "/logo/telkomsel.webp",
+    name: "Telkomsel",
+    color: "red-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Smartphone,
   },
   {
     id: 2,
     name: "XL",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-blue-500",
+=======
+    image: "/logo/xl.webp",
+    color: "blue-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Smartphone,
   },
   {
     id: 3,
     name: "Indosat",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-yellow-500",
+=======
+    image: "/logo/indosat.webp",
+    color: "yellow-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Smartphone,
   },
   {
     id: 4,
     name: "Tri",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-purple-500",
+=======
+    image: "/logo/tri.webp",
+    color: "purple-500",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Smartphone,
   },
   {
     id: 5,
     name: "Smartfren",
+<<<<<<< HEAD
     image: "/placeholder.svg?height=80&width=80",
     color: "bg-red-600",
+=======
+    image: "/logo/smartfren.webp",
+    color: "red-600",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     icon: Smartphone,
   },
 ]
@@ -313,19 +423,31 @@ const paymentMethods = [
 const banners = [
   {
     id: 1,
+<<<<<<< HEAD
     image: "/placeholder.svg?height=400&width=1200",
+=======
+    image: "/logo/banner1.png",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     title: "Special Promo: 50% Bonus Diamonds",
     description: "Top up now and get extra diamonds for Mobile Legends!",
   },
   {
     id: 2,
+<<<<<<< HEAD
     image: "/placeholder.svg?height=400&width=1200",
+=======
+    image: "/logo/banner2.png",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     title: "New Game Release: Genshin Impact 2.0",
     description: "Be the first to experience the new update with special bonuses!",
   },
   {
     id: 3,
+<<<<<<< HEAD
     image: "/placeholder.svg?height=400&width=1200",
+=======
+    image: "/logo/banner3.png",
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     title: "Weekend Special: Double Credits",
     description: "Top up this weekend and receive double game credits!",
   },
@@ -334,6 +456,10 @@ const banners = [
 export default function GameTopupStore() {
   const [activeProductCategory, setActiveProductCategory] = useState("games")
   const [activeTab, setActiveTab] = useState("all")
+<<<<<<< HEAD
+=======
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
   const [selectedGame, setSelectedGame] = useState<number | null>(null)
   const [selectedEwallet, setSelectedEwallet] = useState<number | null>(null)
   const [selectedDataProvider, setSelectedDataProvider] = useState<number | null>(null)
@@ -346,6 +472,7 @@ export default function GameTopupStore() {
     userId: string
   } | null>(null)
 
+<<<<<<< HEAD
   // Memoize handlers to prevent unnecessary re-renders
   const handleProceedToCheckout = useCallback(
     (product: any, productType: string, topupOption: any, paymentMethod: any, userId: string) => {
@@ -361,11 +488,31 @@ export default function GameTopupStore() {
   )
 
   const handleBackToHome = useCallback(() => {
+=======
+  const handleProceedToCheckout = (
+    product: any,
+    productType: string,
+    topupOption: any,
+    paymentMethod: any,
+    userId: string,
+  ) => {
+    setCheckoutData({
+      product,
+      productType,
+      topupOption,
+      paymentMethod,
+      userId,
+    })
+  }
+
+  const handleBackToHome = () => {
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     setSelectedGame(null)
     setSelectedEwallet(null)
     setSelectedDataProvider(null)
     setSelectedPulsaProvider(null)
     setCheckoutData(null)
+<<<<<<< HEAD
   }, [])
 
   const handleCategoryChange = useCallback(
@@ -375,17 +522,23 @@ export default function GameTopupStore() {
     },
     [handleBackToHome],
   )
+=======
+  }
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
 
   // Determine which product is selected
   const isProductSelected =
     selectedGame !== null || selectedEwallet !== null || selectedDataProvider !== null || selectedPulsaProvider !== null
 
+<<<<<<< HEAD
   // Memoize filtered products based on active tab
   const filteredGames = useMemo(() => {
     if (activeTab === "all") return popularGames
     return popularGames.filter((game) => game.category.toLowerCase() === activeTab.toLowerCase())
   }, [activeTab])
 
+=======
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
   return (
     <SidebarProvider>
       <div className="flex min-h-screen flex-col">
@@ -404,7 +557,11 @@ export default function GameTopupStore() {
                   <div className="flex h-16 items-center border-b px-4">
                     <Link href="/" className="flex items-center gap-2 font-bold">
                       <Zap className="h-5 w-5 text-primary" />
+<<<<<<< HEAD
                       <span>TopUpZone</span>
+=======
+                      <span>FeredStore</span>
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                     </Link>
                   </div>
                   <nav className="grid gap-2 p-2">
@@ -413,7 +570,14 @@ export default function GameTopupStore() {
                         key={category.id}
                         href="#"
                         className="flex items-center gap-2 rounded-md px-3 py-2 text-sm hover:bg-accent"
+<<<<<<< HEAD
                         onClick={() => handleCategoryChange(category.id)}
+=======
+                        onClick={() => {
+                          setActiveProductCategory(category.id)
+                          handleBackToHome()
+                        }}
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                       >
                         <category.icon className="h-4 w-4" />
                         {category.name}
@@ -433,7 +597,11 @@ export default function GameTopupStore() {
               </Sheet>
               <Link href="/" className="flex items-center gap-2 font-bold" onClick={handleBackToHome}>
                 <Zap className="h-5 w-5 text-primary" />
+<<<<<<< HEAD
                 <span className="hidden sm:inline-block">TopUpZone</span>
+=======
+                <span className="hidden sm:inline-block">FeredStore</span>
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
               </Link>
             </div>
             <div className="hidden flex-1 items-center justify-center md:flex">
@@ -489,7 +657,14 @@ export default function GameTopupStore() {
                   <SidebarMenuItem key={category.id}>
                     <SidebarMenuButton
                       isActive={activeProductCategory === category.id}
+<<<<<<< HEAD
                       onClick={() => handleCategoryChange(category.id)}
+=======
+                      onClick={() => {
+                        setActiveProductCategory(category.id)
+                        handleBackToHome()
+                      }}
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                     >
                       <category.icon className="h-4 w-4" />
                       <span>{category.name}</span>
@@ -587,7 +762,11 @@ export default function GameTopupStore() {
               />
             ) : (
               <>
+<<<<<<< HEAD
                 {/* Hero Banner Carousel - Lazy loaded */}
+=======
+                {/* Hero Banner Carousel */}
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                 <section className="relative">
                   <div className="container px-4 py-6">
                     <div className="overflow-hidden rounded-xl">
@@ -599,7 +778,11 @@ export default function GameTopupStore() {
                 {/* Mobile Category Tabs */}
                 <div className="container px-4 py-2 lg:hidden">
                   <div className="overflow-x-auto pb-2">
+<<<<<<< HEAD
                     <Tabs value={activeProductCategory} onValueChange={handleCategoryChange} className="w-full">
+=======
+                    <Tabs value={activeProductCategory} onValueChange={setActiveProductCategory} className="w-full">
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                       <TabsList className="inline-flex w-max">
                         {productCategories.map((category) => (
                           <TabsTrigger key={category.id} value={category.id}>
@@ -616,7 +799,11 @@ export default function GameTopupStore() {
                 {activeProductCategory === "games" && (
                   <>
                     {/* Mobile Game Categories */}
+<<<<<<< HEAD
                     <div className="container px-4 py-2 lg:hidden">
+=======
+                    <div className="absolute container px-4 py-2 lg:hidden">
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                       <div className="overflow-x-auto pb-2">
                         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                           <TabsList className="inline-flex w-max">
@@ -634,16 +821,33 @@ export default function GameTopupStore() {
                     <section className="container px-4 py-6">
                       <h2 className="text-2xl font-bold mb-6">Popular Games</h2>
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
+<<<<<<< HEAD
                         {filteredGames.map((game) => (
                           <div key={game.id} className="group cursor-pointer" onClick={() => setSelectedGame(game.id)}>
                             <div className="aspect-square overflow-hidden rounded-xl bg-muted relative">
+=======
+                        {popularGames.map((game) => (
+                          <div key={game.id} className="group cursor-pointer" onClick={() => setSelectedGame(game.id)}>
+                            <div
+                            className="aspect-square
+                            overflow-hidden
+                            rounded-xl bg-muted
+                            relative p-8">
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                               <Image
                                 src={game.image || "/placeholder.svg"}
                                 alt={game.name}
                                 fill
+<<<<<<< HEAD
                                 className="object-cover transition-transform group-hover:scale-105"
                                 sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 16vw"
                                 loading="lazy"
+=======
+                                className="object-contain
+                                transition-transform
+                                group-hover:scale-105
+                                w-24 h-auto"
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                               />
                             </div>
                             <div className="mt-2">
@@ -668,9 +872,31 @@ export default function GameTopupStore() {
                           onClick={() => setSelectedEwallet(ewallet.id)}
                         >
                           <div
+<<<<<<< HEAD
                             className={`aspect-square overflow-hidden rounded-xl ${ewallet.color} relative flex items-center justify-center`}
                           >
                             <ewallet.icon className="h-16 w-16 text-white" />
+=======
+                            className={`aspect-square
+                            overflow-hidden
+                            rounded-xl
+                            hover:shadow-lg
+                            shadow-${ewallet.color}
+                            bg-muted
+                            relative flex
+                            items-center
+                            justify-center p-8`}
+                          >
+                              <Image
+                                src={ewallet.image || "/placeholder.svg"}
+                                alt={ewallet.name}
+                                fill
+                                className="object-contain
+                                transition-transform
+                                group-hover:scale-105
+                                w-24 h-auto"
+                              />
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                           </div>
                           <div className="mt-2">
                             <h3 className="font-medium text-center">{ewallet.name}</h3>
@@ -692,9 +918,31 @@ export default function GameTopupStore() {
                           onClick={() => setSelectedDataProvider(provider.id)}
                         >
                           <div
+<<<<<<< HEAD
                             className={`aspect-square overflow-hidden rounded-xl ${provider.color} relative flex items-center justify-center`}
                           >
                             <provider.icon className="h-16 w-16 text-white" />
+=======
+                            className={`aspect-square
+                            overflow-hidden
+                            rounded-xl
+                            shadow-lg
+                            shadow-${provider.color}
+                            bg-muted
+                            relative flex
+                            items-center
+                            justify-center p-8`}
+                          >
+                              <Image
+                                src={provider.image || "/placeholder.svg"}
+                                alt={provider.name}
+                                fill
+                                className="object-contain
+                                transition-transform
+                                group-hover:scale-105
+                                w-24 h-auto"
+                              />
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                           </div>
                           <div className="mt-2">
                             <h3 className="font-medium text-center">{provider.name}</h3>
@@ -716,9 +964,31 @@ export default function GameTopupStore() {
                           onClick={() => setSelectedPulsaProvider(provider.id)}
                         >
                           <div
+<<<<<<< HEAD
                             className={`aspect-square overflow-hidden rounded-xl ${provider.color} relative flex items-center justify-center`}
                           >
                             <provider.icon className="h-16 w-16 text-white" />
+=======
+                            className={`aspect-square
+                            overflow-hidden
+                            rounded-xl
+                            shadow-lg
+                            shadow-${provider.color}
+                            p-8
+                            relative flex
+                            items-center
+                            justify-center`}
+                          >
+                              <Image
+                                src={provider.image || "/placeholder.svg"}
+                                alt={provider.name}
+                                fill
+                                className="object-contain
+                                transition-transform
+                                group-hover:scale-105
+                                w-24 h-auto"
+                              />
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                           </div>
                           <div className="mt-2">
                             <h3 className="font-medium text-center">{provider.name}</h3>
@@ -743,8 +1013,11 @@ export default function GameTopupStore() {
                                 alt={banner.title}
                                 fill
                                 className="object-cover"
+<<<<<<< HEAD
                                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                                 loading="lazy"
+=======
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                               />
                             </div>
                             <div className="p-4">
@@ -804,7 +1077,11 @@ export default function GameTopupStore() {
               <div>
                 <div className="flex items-center gap-2 font-bold mb-4">
                   <Zap className="h-5 w-5 text-primary" />
+<<<<<<< HEAD
                   <span>TopUpZone</span>
+=======
+                  <span>FeredStore</span>
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   The fastest and most reliable top-up service. Get your credits instantly!
@@ -937,7 +1214,12 @@ export default function GameTopupStore() {
               </div>
             </div>
             <div className="mt-8 border-t pt-6 text-center text-sm text-muted-foreground">
+<<<<<<< HEAD
               <p>© {new Date().getFullYear()} TopUpZone. All rights reserved.</p>
+=======
+              <p>© {new Date().getFullYear()}
+              FeredStore. All rights reserved.</p>
+>>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
             </div>
           </div>
         </footer>
