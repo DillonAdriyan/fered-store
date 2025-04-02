@@ -617,7 +617,11 @@ export default function GameTopupStore() {
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                         {popularGames.map((game) => (
                           <div key={game.id} className="group cursor-pointer" onClick={() => setSelectedGame(game.id)}>
-                            <div className="aspect-square overflow-hidden rounded-xl bg-muted relative">
+                            <div
+                            className="aspect-square
+                            overflow-hidden
+                            rounded-xl bg-muted
+                            relative p-4">
                               <Image
                                 src={game.image || "/placeholder.svg"}
                                 alt={game.name}
@@ -655,8 +659,7 @@ export default function GameTopupStore() {
                             rounded-xl
                             hover:shadow-lg
                             shadow-${ewallet.color}
-                            border-2
-                            border-${ewallet.color}
+                            bg-muted
                             relative flex
                             items-center
                             justify-center`}
@@ -694,14 +697,12 @@ export default function GameTopupStore() {
                             className={`aspect-square
                             overflow-hidden
                             rounded-xl
-                            shadow.lg
+                            shadow-lg
                             shadow-${provider.color}
-                            border-2
-                            border-${provider.color}
-                            bg-gray-50
+                            bg-muted
                             relative flex
                             items-center
-                            justify-center`}
+                            justify-center p-4`}
                           >
                               <Image
                                 src={provider.image || "/placeholder.svg"}
@@ -733,9 +734,25 @@ export default function GameTopupStore() {
                           onClick={() => setSelectedPulsaProvider(provider.id)}
                         >
                           <div
-                            className={`aspect-square overflow-hidden rounded-xl ${provider.color} relative flex items-center justify-center`}
+                            className={`aspect-square
+                            overflow-hidden
+                            rounded-xl
+                            border-2
+                            border-${provider.color}
+                            p-4
+                            relative flex
+                            items-center
+                            justify-center`}
                           >
-                            <provider.image className="h-16 w-16 text-white" />
+                              <Image
+                                src={provider.image || "/placeholder.svg"}
+                                alt={provider.name}
+                                fill
+                                className="object-contain
+                                transition-transform
+                                group-hover:scale-105
+                                w-32 h-32"
+                              />
                           </div>
                           <div className="mt-2">
                             <h3 className="font-medium text-center">{provider.name}</h3>
