@@ -379,7 +379,7 @@ export default function GameTopupStore() {
                   <div className="flex h-16 items-center border-b px-4">
                     <Link href="/" className="flex items-center gap-2 font-bold">
                       <Zap className="h-5 w-5 text-primary" />
-                      <span>TopUpZone</span>
+                      <span>FeredStore</span>
                     </Link>
                   </div>
                   <nav className="grid gap-2 p-2">
@@ -411,7 +411,7 @@ export default function GameTopupStore() {
               </Sheet>
               <Link href="/" className="flex items-center gap-2 font-bold" onClick={handleBackToHome}>
                 <Zap className="h-5 w-5 text-primary" />
-                <span className="hidden sm:inline-block">TopUpZone</span>
+                <span className="hidden sm:inline-block">FeredStore</span>
               </Link>
             </div>
             <div className="hidden flex-1 items-center justify-center md:flex">
@@ -625,7 +625,7 @@ export default function GameTopupStore() {
                                 className="object-cover
                                 transition-transform
                                 group-hover:scale-105
-                                w-32 h-auto"
+                                w-32 h-32"
                               />
                             </div>
                             <div className="mt-2">
@@ -654,12 +654,22 @@ export default function GameTopupStore() {
                             overflow-hidden
                             rounded-xl
                             hover:shadow-lg
-                            hover:shadow-${ewallet.color}
+                            shadow-${ewallet.color}
+                            border-2
+                            border-${ewallet.color}
                             relative flex
                             items-center
                             justify-center`}
                           >
-                            <ewallet.icon className="h-16 w-16 text-white" />
+                              <Image
+                                src={ewallet.image || "/placeholder.svg"}
+                                alt={ewallet.name}
+                                fill
+                                className="object-cover
+                                transition-transform
+                                group-hover:scale-105
+                                w-32 h-32"
+                              />
                           </div>
                           <div className="mt-2">
                             <h3 className="font-medium text-center">{ewallet.name}</h3>
@@ -684,13 +694,24 @@ export default function GameTopupStore() {
                             className={`aspect-square
                             overflow-hidden
                             rounded-xl
-                            hover:shadow-${provider.color}
+                            shadow.lg
+                            shadow-${provider.color}
+                            border-2
+                            border-${provider.color}
                             bg-gray-50
                             relative flex
                             items-center
                             justify-center`}
                           >
-                            <provider.image className="h-16 w-16 text-white" />
+                              <Image
+                                src={provider.image || "/placeholder.svg"}
+                                alt={provider.name}
+                                fill
+                                className="object-cover
+                                transition-transform
+                                group-hover:scale-105
+                                w-32 h-32"
+                              />
                           </div>
                           <div className="mt-2">
                             <h3 className="font-medium text-center">{provider.name}</h3>
@@ -798,7 +819,7 @@ export default function GameTopupStore() {
               <div>
                 <div className="flex items-center gap-2 font-bold mb-4">
                   <Zap className="h-5 w-5 text-primary" />
-                  <span>TopUpZone</span>
+                  <span>FeredStore</span>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   The fastest and most reliable top-up service. Get your credits instantly!
@@ -931,7 +952,8 @@ export default function GameTopupStore() {
               </div>
             </div>
             <div className="mt-8 border-t pt-6 text-center text-sm text-muted-foreground">
-              <p>© {new Date().getFullYear()} TopUpZone. All rights reserved.</p>
+              <p>© {new Date().getFullYear()}
+              FeredStore. All rights reserved.</p>
             </div>
           </div>
         </footer>
