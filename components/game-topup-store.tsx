@@ -103,35 +103,35 @@ const ewalletOptions = [
     id: 1,
     name: "GoPay",
     image: "/logo/gopay.webp",
-    color: "bg-blue-500",
+    color: "blue-500",
     icon: Wallet,
   },
   {
     id: 2,
     name: "OVO",
     image: "/logo/ovo.webp",
-    color: "bg-purple-500",
+    color: "purple-500",
     icon: Wallet,
   },
   {
     id: 3,
     name: "DANA",
     image: "/logo/dana.webp",
-    color: "bg-blue-400",
+    color: "blue-400",
     icon: Wallet,
   },
   {
     id: 4,
     name: "LinkAja",
     image: "/logo/linkaja.webp",
-    color: "bg-red-500",
+    color: "red-500",
     icon: Wallet,
   },
   {
     id: 5,
     name: "ShopeePay",
     image: "/logo/shopepay.webp",
-    color: "bg-orange-500",
+    color: "orange-500",
     icon: Wallet,
   },
 ]
@@ -142,35 +142,35 @@ const dataProviders = [
     id: 1,
     name: "Telkomsel",
     image: "/logo/telkomsel.webp",
-    color: "bg-red-500",
+    color: "red-500",
     icon: Wifi,
   },
   {
     id: 2,
     name: "XL",
     image: "/logo/xl.webp",
-    color: "bg-blue-500",
+    color: "blue-500",
     icon: Wifi,
   },
   {
     id: 3,
     name: "Indosat",
     image: "/logo/indosat.webp",
-    color: "bg-yellow-500",
+    color: "yellow-500",
     icon: Wifi,
   },
   {
     id: 4,
     name: "Tri",
     image: "/logo/tri.webp",
-    color: "bg-purple-500",
+    color: "purple-500",
     icon: Wifi,
   },
   {
     id: 5,
     name: "Smartfren",
     image: "/logo/smartfren.webp",
-    color: "bg-red-600",
+    color: "red-600",
     icon: Wifi,
   },
 ]
@@ -181,35 +181,35 @@ const pulsaProviders = [
     id: 1,
     image: "/logo/telkomsel.webp",
     name: "Telkomsel",
-    color: "bg-red-500",
+    color: "red-500",
     icon: Smartphone,
   },
   {
     id: 2,
     name: "XL",
     image: "/logo/xl.webp",
-    color: "bg-blue-500",
+    color: "blue-500",
     icon: Smartphone,
   },
   {
     id: 3,
     name: "Indosat",
     image: "/logo/indosat.webp",
-    color: "bg-yellow-500",
+    color: "yellow-500",
     icon: Smartphone,
   },
   {
     id: 4,
     name: "Tri",
     image: "/logo/tri.webp",
-    color: "bg-purple-500",
+    color: "purple-500",
     icon: Smartphone,
   },
   {
     id: 5,
     name: "Smartfren",
     image: "/logo/smartfren.webp",
-    color: "bg-red-600",
+    color: "red-600",
     icon: Smartphone,
   },
 ]
@@ -299,19 +299,19 @@ const paymentMethods = [
 const banners = [
   {
     id: 1,
-    image: "/placeholder.svg?height=400&width=1200",
+    image: "/logo/banner1.png",
     title: "Special Promo: 50% Bonus Diamonds",
     description: "Top up now and get extra diamonds for Mobile Legends!",
   },
   {
     id: 2,
-    image: "/placeholder.svg?height=400&width=1200",
+    image: "/logo/banner2.png",
     title: "New Game Release: Genshin Impact 2.0",
     description: "Be the first to experience the new update with special bonuses!",
   },
   {
     id: 3,
-    image: "/placeholder.svg?height=400&width=1200",
+    image: "/logo/banner3.png",
     title: "Weekend Special: Double Credits",
     description: "Top up this weekend and receive double game credits!",
   },
@@ -622,7 +622,10 @@ export default function GameTopupStore() {
                                 src={game.image || "/placeholder.svg"}
                                 alt={game.name}
                                 fill
-                                className="object-cover transition-transform group-hover:scale-105"
+                                className="object-cover
+                                transition-transform
+                                group-hover:scale-105
+                                w-32 h-auto"
                               />
                             </div>
                             <div className="mt-2">
@@ -647,7 +650,14 @@ export default function GameTopupStore() {
                           onClick={() => setSelectedEwallet(ewallet.id)}
                         >
                           <div
-                            className={`aspect-square overflow-hidden rounded-xl ${ewallet.color} relative flex items-center justify-center`}
+                            className={`aspect-square
+                            overflow-hidden
+                            rounded-xl
+                            hover:shadow-lg
+                            hover:shadow-${ewallet.color}
+                            relative flex
+                            items-center
+                            justify-center`}
                           >
                             <ewallet.icon className="h-16 w-16 text-white" />
                           </div>
@@ -671,9 +681,16 @@ export default function GameTopupStore() {
                           onClick={() => setSelectedDataProvider(provider.id)}
                         >
                           <div
-                            className={`aspect-square overflow-hidden rounded-xl ${provider.color} relative flex items-center justify-center`}
+                            className={`aspect-square
+                            overflow-hidden
+                            rounded-xl
+                            hover:shadow-${provider.color}
+                            bg-gray-50
+                            relative flex
+                            items-center
+                            justify-center`}
                           >
-                            <provider.icon className="h-16 w-16 text-white" />
+                            <provider.image className="h-16 w-16 text-white" />
                           </div>
                           <div className="mt-2">
                             <h3 className="font-medium text-center">{provider.name}</h3>
@@ -697,7 +714,7 @@ export default function GameTopupStore() {
                           <div
                             className={`aspect-square overflow-hidden rounded-xl ${provider.color} relative flex items-center justify-center`}
                           >
-                            <provider.icon className="h-16 w-16 text-white" />
+                            <provider.image className="h-16 w-16 text-white" />
                           </div>
                           <div className="mt-2">
                             <h3 className="font-medium text-center">{provider.name}</h3>
