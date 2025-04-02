@@ -621,7 +621,7 @@ export default function GameTopupStore() {
                             className="aspect-square
                             overflow-hidden
                             rounded-xl bg-muted
-                            relative p-4">
+                            relative p-8">
                               <Image
                                 src={game.image || "/placeholder.svg"}
                                 alt={game.name}
@@ -629,7 +629,7 @@ export default function GameTopupStore() {
                                 className="object-contain
                                 transition-transform
                                 group-hover:scale-105
-                                w-24 h-24"
+                                w-24 h-auto"
                               />
                             </div>
                             <div className="mt-2">
@@ -662,7 +662,7 @@ export default function GameTopupStore() {
                             bg-muted
                             relative flex
                             items-center
-                            justify-center`}
+                            justify-center p-8`}
                           >
                               <Image
                                 src={ewallet.image || "/placeholder.svg"}
@@ -671,7 +671,7 @@ export default function GameTopupStore() {
                                 className="object-contain
                                 transition-transform
                                 group-hover:scale-105
-                                w-32 h-32"
+                                w-24 h-auto"
                               />
                           </div>
                           <div className="mt-2">
@@ -702,7 +702,7 @@ export default function GameTopupStore() {
                             bg-muted
                             relative flex
                             items-center
-                            justify-center p-4`}
+                            justify-center p-8`}
                           >
                               <Image
                                 src={provider.image || "/placeholder.svg"}
@@ -711,7 +711,7 @@ export default function GameTopupStore() {
                                 className="object-contain
                                 transition-transform
                                 group-hover:scale-105
-                                w-32 h-32"
+                                w-24 h-auto"
                               />
                           </div>
                           <div className="mt-2">
@@ -737,9 +737,9 @@ export default function GameTopupStore() {
                             className={`aspect-square
                             overflow-hidden
                             rounded-xl
-                            border-2
-                            border-${provider.color}
-                            p-4
+                            shadow-lg
+                            shadow-${provider.color}
+                            p-8
                             relative flex
                             items-center
                             justify-center`}
@@ -751,7 +751,7 @@ export default function GameTopupStore() {
                                 className="object-contain
                                 transition-transform
                                 group-hover:scale-105
-                                w-32 h-32"
+                                w-24 h-auto"
                               />
                           </div>
                           <div className="mt-2">
