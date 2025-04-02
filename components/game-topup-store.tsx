@@ -597,7 +597,7 @@ export default function GameTopupStore() {
                 {activeProductCategory === "games" && (
                   <>
                     {/* Mobile Game Categories */}
-                    <div className="container px-4 py-2 lg:hidden">
+                    <div className="absolute container px-4 py-2 lg:hidden">
                       <div className="overflow-x-auto pb-2">
                         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
                           <TabsList className="inline-flex w-max">
@@ -622,10 +622,10 @@ export default function GameTopupStore() {
                                 src={game.image || "/placeholder.svg"}
                                 alt={game.name}
                                 fill
-                                className="object-cover
+                                className="object-contain
                                 transition-transform
                                 group-hover:scale-105
-                                w-32 h-32"
+                                w-24 h-24"
                               />
                             </div>
                             <div className="mt-2">
@@ -665,7 +665,7 @@ export default function GameTopupStore() {
                                 src={ewallet.image || "/placeholder.svg"}
                                 alt={ewallet.name}
                                 fill
-                                className="object-cover
+                                className="object-contain
                                 transition-transform
                                 group-hover:scale-105
                                 w-32 h-32"
@@ -707,7 +707,7 @@ export default function GameTopupStore() {
                                 src={provider.image || "/placeholder.svg"}
                                 alt={provider.name}
                                 fill
-                                className="object-cover
+                                className="object-contain
                                 transition-transform
                                 group-hover:scale-105
                                 w-32 h-32"

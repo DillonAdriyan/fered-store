@@ -58,7 +58,7 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
           <div
             key={banner.id}
             className={cn(
-              "absolute inset-0 transition-opacity duration-1000",
+              "absolute inset-0 transition-opacity duration-1000 group",
               currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none",
             )}
           >
@@ -69,7 +69,11 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
               className="object-cover"
               priority={index === 0}
             />
-            <div className="hidden hover:absolute inset-0 bg-gradient-to-r from-black/60 to-transparent p-6 flex flex-col justify-end">
+            <div className="opacity-0
+            group-hover:opacity-100 absolute
+            inset-0 bg-gradient-to-r from-black/60
+            to-transparent p-6 flex flex-col
+            justify-end">
               <h2 className="text-xl md:text-3xl font-bold text-white mb-2">{banner.title}</h2>
               <p className="text-sm md:text-base text-white/80 max-w-md">{banner.description}</p>
               <Button className="mt-4 w-fit">Top Up Now</Button>
