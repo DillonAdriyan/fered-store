@@ -299,19 +299,19 @@ const paymentMethods = [
 const banners = [
   {
     id: 1,
-    image: "/logo/banner1.png",
+    image: "/logo/banner1.webp",
     title: "Special Promo: 50% Bonus Diamonds",
     description: "Top up now and get extra diamonds for Mobile Legends!",
   },
   {
     id: 2,
-    image: "/logo/banner2.png",
+    image: "/logo/banner2.webp",
     title: "New Game Release: Genshin Impact 2.0",
     description: "Be the first to experience the new update with special bonuses!",
   },
   {
     id: 3,
-    image: "/logo/banner3.png",
+    image: "/logo/banner3.webp",
     title: "Weekend Special: Double Credits",
     description: "Top up this weekend and receive double game credits!",
   },
