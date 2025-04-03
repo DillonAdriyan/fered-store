@@ -1,10 +1,8 @@
 "use client"
 
-<<<<<<< HEAD
+
 import { useState, useCallback, memo } from "react"
-=======
-import { useState } from "react"
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
+
 import { ChevronDown, GamepadIcon as GameController, Smartphone, Store, Wallet, Wifi } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"
@@ -45,7 +43,6 @@ interface CheckoutPageProps {
   onBack: () => void
 }
 
-<<<<<<< HEAD
 // Memoize the PaymentOption component to prevent unnecessary re-renders
 const PaymentOption = memo(
   ({
@@ -133,8 +130,6 @@ const PaymentInstructions = memo(
 )
 PaymentInstructions.displayName = "PaymentInstructions"
 
-=======
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
 export default function CheckoutPage({
   product,
   productType,
@@ -152,25 +147,18 @@ export default function CheckoutPage({
   const [cardCvv, setCardCvv] = useState("")
   const [isProcessing, setIsProcessing] = useState(false)
 
-<<<<<<< HEAD
   const formatPrice = useCallback((price: number) => {
-=======
-  const formatPrice = (price: number) => {
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
+
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
       minimumFractionDigits: 0,
     }).format(price)
-<<<<<<< HEAD
+
   }, [])
 
   const handlePayment = useCallback(() => {
-=======
-  }
 
-  const handlePayment = () => {
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     setIsProcessing(true)
     // Simulate payment processing
     setTimeout(() => {
@@ -178,17 +166,11 @@ export default function CheckoutPage({
       alert("Payment successful! Your credits will be added to your account shortly.")
       onBack()
     }, 2000)
-<<<<<<< HEAD
   }, [onBack])
 
   // Get the appropriate icon based on product type
   const getProductIcon = useCallback(() => {
-=======
-  }
 
-  // Get the appropriate icon based on product type
-  const getProductIcon = () => {
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     switch (productType) {
       case "game":
         return <GameController className="h-6 w-6 text-white" />
@@ -201,17 +183,11 @@ export default function CheckoutPage({
       default:
         return <GameController className="h-6 w-6 text-white" />
     }
-<<<<<<< HEAD
   }, [productType])
 
   // Get the appropriate label based on product type
   const getUserIdLabel = useCallback(() => {
-=======
-  }
 
-  // Get the appropriate label based on product type
-  const getUserIdLabel = () => {
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     switch (productType) {
       case "game":
         return "User ID"
@@ -222,17 +198,10 @@ export default function CheckoutPage({
       default:
         return "User ID"
     }
-<<<<<<< HEAD
   }, [productType])
 
   // Get the appropriate title based on product type
   const getTitle = useCallback(() => {
-=======
-  }
-
-  // Get the appropriate title based on product type
-  const getTitle = () => {
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     switch (productType) {
       case "game":
         return "Game Top-Up"
@@ -245,11 +214,8 @@ export default function CheckoutPage({
       default:
         return "Top-Up"
     }
-<<<<<<< HEAD
   }, [productType])
-=======
-  }
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
+
 
   return (
     <div className="container px-4 py-6">
@@ -268,7 +234,6 @@ export default function CheckoutPage({
               <div className="flex items-center gap-4">
                 {product.image ? (
                   <div className="relative h-16 w-16 overflow-hidden rounded-lg">
-<<<<<<< HEAD
                     <Image
                       src={product.image || "/placeholder.svg"}
                       alt={product.name}
@@ -276,9 +241,7 @@ export default function CheckoutPage({
                       className="object-cover"
                       sizes="64px"
                     />
-=======
-                    <Image src={product.image || "/placeholder.svg"} alt={product.name} fill className="object-cover" />
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
+
                   </div>
                 ) : (
                   <div
@@ -360,7 +323,7 @@ export default function CheckoutPage({
                 <RadioGroup value={selectedPaymentOption || ""} onValueChange={setSelectedPaymentOption}>
                   <div className="grid gap-3">
                     {paymentMethod.options.map((option) => (
-<<<<<<< HEAD
+
                       <PaymentOption
                         key={option.id}
                         option={option}
@@ -368,26 +331,6 @@ export default function CheckoutPage({
                         onClick={() => setSelectedPaymentOption(option.id)}
                         icon={Wallet}
                       />
-=======
-                      <div
-                        key={option.id}
-                        className={cn(
-                          "flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors",
-                          selectedPaymentOption === option.id
-                            ? "border-primary bg-primary/5"
-                            : "hover:border-primary/50",
-                        )}
-                        onClick={() => setSelectedPaymentOption(option.id)}
-                      >
-                        <RadioGroupItem value={option.id} id={option.id} />
-                        <div className="flex h-10 w-10 items-center justify-center rounded-md bg-muted">
-                          <Wallet className="h-5 w-5" />
-                        </div>
-                        <label htmlFor={option.id} className="font-medium cursor-pointer flex-1">
-                          {option.name}
-                        </label>
-                      </div>
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
                     ))}
                   </div>
                 </RadioGroup>
@@ -399,7 +342,6 @@ export default function CheckoutPage({
                 <RadioGroup value={selectedPaymentOption || ""} onValueChange={setSelectedPaymentOption}>
                   <div className="grid gap-3">
                     {paymentMethod.options.map((option) => (
-<<<<<<< HEAD
                       <PaymentOption
                         key={option.id}
                         option={option}
@@ -415,77 +357,14 @@ export default function CheckoutPage({
                   selectedOption={selectedPaymentOption}
                   options={paymentMethod.options}
                 />
-=======
-                      <div
-                        key={option.id}
-                        className={cn(
-                          "flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors",
-                          selectedPaymentOption === option.id
-                            ? "border-primary bg-primary/5"
-                            : "hover:border-primary/50",
-                        )}
-                        onClick={() => setSelectedPaymentOption(option.id)}
-                      >
-                        <RadioGroupItem value={option.id} id={option.id} />
-                        <div className="flex h-10 w-10 items-center justify-center rounded-md bg-muted">
-                          <Store className="h-5 w-5" />
-                        </div>
-                        <label htmlFor={option.id} className="font-medium cursor-pointer flex-1">
-                          {option.name}
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </RadioGroup>
-                <div className="rounded-lg bg-muted p-4">
-                  <h3 className="font-medium mb-2">Payment Instructions:</h3>
-                  <ol className="list-decimal pl-5 text-sm space-y-1">
-                    <li>
-                      Go to your nearest{" "}
-                      {selectedPaymentOption
-                        ? paymentMethod.options.find((o) => o.id === selectedPaymentOption)?.name
-                        : "convenience store"}
-                    </li>
-                    <li>Show the payment code to the cashier</li>
-                    <li>Make the payment</li>
-                    <li>Keep your receipt as proof of payment</li>
-                  </ol>
-                </div>
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
+
               </div>
             )}
 
             {paymentMethod.type === "qris" && (
               <div className="space-y-4">
-<<<<<<< HEAD
                 <QRCode />
                 <PaymentInstructions type="qris" selectedOption={null} />
-=======
-                <div className="flex flex-col items-center p-4">
-                  <div className="bg-white p-4 rounded-lg mb-4">
-                    <div className="aspect-square w-48 relative">
-                      <Image
-                        src="/placeholder.svg?height=200&width=200"
-                        alt="QRIS Code"
-                        fill
-                        className="object-contain"
-                      />
-                    </div>
-                  </div>
-                  <p className="text-center text-sm text-muted-foreground">
-                    Scan this QR code with any QRIS-compatible e-wallet app
-                  </p>
-                </div>
-                <div className="rounded-lg bg-muted p-4">
-                  <h3 className="font-medium mb-2">Payment Instructions:</h3>
-                  <ol className="list-decimal pl-5 text-sm space-y-1">
-                    <li>Open your e-wallet app (GoPay, OVO, DANA, etc.)</li>
-                    <li>Scan the QR code above</li>
-                    <li>Confirm the payment amount</li>
-                    <li>Complete the payment in your app</li>
-                  </ol>
-                </div>
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
               </div>
             )}
           </div>

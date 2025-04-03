@@ -1,10 +1,7 @@
 "use client"
 
-<<<<<<< HEAD
+
 import { useState, useEffect, useRef, useCallback } from "react"
-=======
-import { useState, useEffect, useRef } from "react"
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
 import { ChevronLeft, ChevronRight } from "lucide-react"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
@@ -23,7 +20,6 @@ interface BannerCarouselProps {
 
 export default function BannerCarousel({ banners }: BannerCarouselProps) {
   const [currentSlide, setCurrentSlide] = useState(0)
-<<<<<<< HEAD
   const [isClient, setIsClient] = useState(false)
   const timeoutRef = useRef<NodeJS.Timeout | null>(null)
 
@@ -41,17 +37,6 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
   useEffect(() => {
     if (!isClient) return
 
-=======
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null)
-
-  const resetTimeout = () => {
-    if (timeoutRef.current) {
-      clearTimeout(timeoutRef.current)
-    }
-  }
-
-  useEffect(() => {
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
     resetTimeout()
     timeoutRef.current = setTimeout(
       () => setCurrentSlide((prevSlide) => (prevSlide + 1) % banners.length),
@@ -61,7 +46,7 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
     return () => {
       resetTimeout()
     }
-<<<<<<< HEAD
+
   }, [currentSlide, banners.length, resetTimeout, isClient])
 
   const goToSlide = useCallback((index: number) => {
@@ -79,21 +64,7 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
   // Don't render anything on the server
   if (!isClient) {
     return <div className="relative aspect-[21/9] bg-muted animate-pulse rounded-xl"></div>
-=======
-  }, [currentSlide, banners.length])
-
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index)
-  }
-
-  const goToPrevSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide - 1 + banners.length) % banners.length)
-  }
-
-  const goToNextSlide = () => {
-    setCurrentSlide((prevSlide) => (prevSlide + 1) % banners.length)
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
-  }
+ }
 
   return (
     <div className="relative">
@@ -102,11 +73,8 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
           <div
             key={banner.id}
             className={cn(
-<<<<<<< HEAD
+
               "absolute inset-0 transition-opacity duration-1000",
-=======
-              "absolute inset-0 transition-opacity duration-1000 group",
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
               currentSlide === index ? "opacity-100" : "opacity-0 pointer-events-none",
             )}
           >
@@ -116,18 +84,11 @@ export default function BannerCarousel({ banners }: BannerCarouselProps) {
               fill
               className="object-cover"
               priority={index === 0}
-<<<<<<< HEAD
+
               sizes="(max-width: 768px) 100vw, 1200px"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/60 to-transparent p-6 flex flex-col justify-end">
-=======
-            />
-            <div className="opacity-0
-            group-hover:opacity-100 absolute
-            inset-0 bg-gradient-to-r from-black/60
-            to-transparent p-6 flex flex-col
-            justify-end">
->>>>>>> 05328758480f2ca0e80c357fdbd5c34d986925b5
+
               <h2 className="text-xl md:text-3xl font-bold text-white mb-2">{banner.title}</h2>
               <p className="text-sm md:text-base text-white/80 max-w-md">{banner.description}</p>
               <Button className="mt-4 w-fit">Top Up Now</Button>
