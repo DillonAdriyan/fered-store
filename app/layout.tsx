@@ -8,6 +8,8 @@ export const metadata: Metadata = {
   title: 'Fered Store',
   description: 'Topup E-Wallet & All Games',
   developer: 'hidillon.my.id',
+  'google-site-verification': '3XJdJdZsMgFBGXE4ZCJHGQ89Bju3MIFTF927v2ppWrk',
+  
 
 }
 
