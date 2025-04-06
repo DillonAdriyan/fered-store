@@ -484,7 +484,7 @@ Terima kasih telah berbelanja di toko kami!`
           </div>
         </div>
       </div>
-    </div>
+
         <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
       <DialogContent>
         <DialogHeader>
@@ -511,6 +511,7 @@ Terima kasih telah berbelanja di toko kami!`
         </DialogFooter>
       </DialogContent>
     </Dialog>
+        </div>
   )
 }
 
