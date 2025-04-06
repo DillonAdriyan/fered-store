@@ -11,7 +11,15 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { cn } from "@/lib/utils"
-
+// Tambahkan import untuk Dialog
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog"
 interface CheckoutPageProps {
   product: {
     id: number
@@ -157,16 +165,19 @@ export default function CheckoutPage({
 
   }, [])
 
-  const handlePayment = useCallback(() => {
+// Di dalam komponen CheckoutPage, tambahkan state untuk dialog
+const [isDialogOpen, setIsDialogOpen] = useState(false)
 
-    setIsProcessing(true)
-    // Simulate payment processing
-    setTimeout(() => {
-      setIsProcessing(false)
-      alert("Payment successful! Your credits will be added to your account shortly.")
-      onBack()
-    }, 2000)
-  }, [onBack])
+// Modifikasi fungsi handlePayment
+const handlePayment = useCallback(() => {
+  setIsProcessing(true)
+  
+  // Simulasi proses pembayaran
+  setTimeout(() => {
+    setIsProcessing(false)
+    setIsDialogOpen(true) // Buka dialog konfirmasi
+  }, 1000)
+}, [])
 
   // Get the appropriate icon based on product type
   const getProductIcon = useCallback(() => {
@@ -215,6 +226,54 @@ export default function CheckoutPage({
         return "Top-Up"
     }
   }, [productType])
+
+
+
+
+// Fungsi untuk mengirim ke WhatsApp
+const sendToWhatsApp = useCallback(() => {
+  // Nomor WhatsApp bisnis Anda
+  const whatsappNumber = "628123456789" // Ganti dengan nomor bisnis WhatsApp Anda
+  
+  // Menyusun pesan untuk WhatsApp
+  const message = `*PESANAN BARU*
+  
+*Detail Produk:*
+Nama: ${product.name}
+Paket: ${topupOption.name}
+Harga: ${formatPrice(topupOption.price)}
+
+*Data Pelanggan:*
+${getUserIdLabel()}: ${userId}
+
+*Metode Pembayaran:*
+${paymentMethod.name}${selectedPaymentOption && paymentMethod.options ? 
+  ` - ${paymentMethod.options.find(o => o.id === selectedPaymentOption)?.name}` : 
+  ''}
+
+*Total Pembayaran:*
+Subtotal: ${formatPrice(topupOption.price)}
+Biaya Admin: ${formatPrice(2000)}
+Total: ${formatPrice(topupOption.price + 2000)}
+
+Terima kasih telah berbelanja di toko kami!`
+
+  // Encode pesan untuk URL
+  const encodedMessage = encodeURIComponent(message)
+  
+  // Buat URL WhatsApp
+  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
+  
+  // Tutup dialog
+  setIsDialogOpen(false)
+  
+  // Redirect ke WhatsApp
+  window.open(whatsappUrl, '_blank')
+}, [product, topupOption, paymentMethod, userId, selectedPaymentOption, formatPrice, getUserIdLabel])
+
+// Tambahkan komponen Dialog di bawah return statement di akhir komponen
+// ...
+
 
 
   return (
@@ -426,6 +485,32 @@ export default function CheckoutPage({
         </div>
       </div>
     </div>
+        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Konfirmasi Pesanan</DialogTitle>
+          <DialogDescription>
+            Pesanan Anda akan diteruskan ke WhatsApp untuk menyelesaikan proses pembelian.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-2 py-2">
+          <div className="rounded-lg bg-muted p-3">
+            <div className="space-y-1">
+              <h4 className="font-medium">{product.name} - {topupOption.name}</h4>
+              <p className="text-sm">Total: {formatPrice(topupOption.price + 2000)}</p>
+            </div>
+          </div>
+        </div>
+        <DialogFooter>
+          <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
+            Batal
+          </Button>
+          <Button onClick={sendToWhatsApp}>
+            Lanjutkan ke WhatsApp
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   )
 }
 

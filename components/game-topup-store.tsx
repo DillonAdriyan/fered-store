@@ -300,7 +300,7 @@ const banners = [
   {
     id: 1,
     image: "/logo/banner1.webp",
-    title: "Special Promo: 50% Bonus Diamonds",
+    title: "Special Promo: 30% Bonus Diamonds",
     description: "Top up now and get extra diamonds for Mobile Legends!",
   },
   {
