@@ -233,7 +233,7 @@ const handlePayment = useCallback(() => {
 // Fungsi untuk mengirim ke WhatsApp
 const sendToWhatsApp = useCallback(() => {
   // Nomor WhatsApp bisnis Anda
-  const whatsappNumber = "628123456789" // Ganti dengan nomor bisnis WhatsApp Anda
+  const whatsappNumber = "6282322575578" // Ganti dengan nomor bisnis WhatsApp Anda
   
   // Menyusun pesan untuk WhatsApp
   const message = `*PESANAN BARU*
