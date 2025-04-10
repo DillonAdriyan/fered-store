@@ -1,142 +1,28 @@
-"use client"
+// Tambahkan import berikut
+import { useEffect } from "react";
 
+// Di dalam file checkout-page.tsx
 
-import { useState, useCallback, memo } from "react"
-
-import { ChevronDown, GamepadIcon as GameController, Smartphone, Store, Wallet, Wifi } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { cn } from "@/lib/utils"
-// Tambahkan import untuk Dialog
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog"
-interface CheckoutPageProps {
-  product: {
-    id: number
-    name: string
-    image?: string
-    category?: string
-    color?: string
-    icon?: any
-  }
-  productType: string
-  topupOption: {
-    id: number
-    name: string
-    price: number
-    discount: number
-    description?: string
-  }
-  paymentMethod: {
-    id: number
-    name: string
-    icon: any
-    type: string
-    options?: {
-      id: string
-      name: string
-    }[]
-  }
-  userId: string
-  onBack: () => void
+// Tambahkan interface untuk response dari backend
+interface TransactionResponse {
+  success: boolean;
+  token: string;
+  redirect_url: string;
 }
 
-// Memoize the PaymentOption component to prevent unnecessary re-renders
-const PaymentOption = memo(
-  ({
-    option,
-    isSelected,
-    onClick,
-    icon: Icon,
-  }: {
-    option: { id: string; name: string }
-    isSelected: boolean
-    onClick: () => void
-    icon: any
-  }) => (
-    <div
-      className={cn(
-        "flex cursor-pointer items-center gap-3 rounded-lg border p-4 transition-colors",
-        isSelected ? "border-primary bg-primary/5" : "hover:border-primary/50",
-      )}
-      onClick={onClick}
-    >
-      <RadioGroupItem value={option.id} id={option.id} />
-      <div className="flex h-10 w-10 items-center justify-center rounded-md bg-muted">
-        <Icon className="h-5 w-5" />
-      </div>
-      <label htmlFor={option.id} className="font-medium cursor-pointer flex-1">
-        {option.name}
-      </label>
-    </div>
-  ),
-)
-PaymentOption.displayName = "PaymentOption"
-
-// Memoize the QRCode component
-const QRCode = memo(() => (
-  <div className="flex flex-col items-center p-4">
-    <div className="bg-white p-4 rounded-lg mb-4">
-      <div className="aspect-square w-48 relative">
-        <Image
-          src="/placeholder.svg?height=200&width=200"
-          alt="QRIS Code"
-          fill
-          className="object-contain"
-          sizes="192px"
-        />
-      </div>
-    </div>
-    <p className="text-center text-sm text-muted-foreground">Scan this QR code with any QRIS-compatible e-wallet app</p>
-  </div>
-))
-QRCode.displayName = "QRCode"
-
-// Memoize the PaymentInstructions component
-const PaymentInstructions = memo(
-  ({
-    type,
-    selectedOption,
-    options,
-  }: {
-    type: string
-    selectedOption: string | null
-    options?: { id: string; name: string }[]
-  }) => (
-    <div className="rounded-lg bg-muted p-4">
-      <h3 className="font-medium mb-2">Payment Instructions:</h3>
-      {type === "store" ? (
-        <ol className="list-decimal pl-5 text-sm space-y-1">
-          <li>
-            Go to your nearest{" "}
-            {selectedOption && options ? options.find((o) => o.id === selectedOption)?.name : "convenience store"}
-          </li>
-          <li>Show the payment code to the cashier</li>
-          <li>Make the payment</li>
-          <li>Keep your receipt as proof of payment</li>
-        </ol>
-      ) : (
-        <ol className="list-decimal pl-5 text-sm space-y-1">
-          <li>Open your e-wallet app (GoPay, OVO, DANA, etc.)</li>
-          <li>Scan the QR code above</li>
-          <li>Confirm the payment amount</li>
-          <li>Complete the payment in your app</li>
-        </ol>
-      )}
-    </div>
-  ),
-)
-PaymentInstructions.displayName = "PaymentInstructions"
+// Tambahkan tipe untuk Midtrans Snap
+declare global {
+  interface Window {
+    snap?: {
+      pay: (token: string, options: {
+        onSuccess: (result: any) => void;
+        onPending: (result: any) => void;
+        onError: (result: any) => void;
+        onClose: () => void;
+      }) => void;
+    };
+  }
+}
 
 export default function CheckoutPage({
   product,
@@ -146,39 +32,109 @@ export default function CheckoutPage({
   userId,
   onBack,
 }: CheckoutPageProps) {
+  // State existings tetap sama
   const [selectedPaymentOption, setSelectedPaymentOption] = useState<string | null>(
     paymentMethod.options && paymentMethod.options.length > 0 ? paymentMethod.options[0].id : null,
-  )
-  const [cardNumber, setCardNumber] = useState("")
-  const [cardName, setCardName] = useState("")
-  const [cardExpiry, setCardExpiry] = useState("")
-  const [cardCvv, setCardCvv] = useState("")
-  const [isProcessing, setIsProcessing] = useState(false)
+  );
+  const [cardNumber, setCardNumber] = useState("");
+  const [cardName, setCardName] = useState("");
+  const [cardExpiry, setCardExpiry] = useState("");
+  const [cardCvv, setCardCvv] = useState("");
+  const [isProcessing, setIsProcessing] = useState(false);
+  
+  // Tambahkan state untuk customer info
+  const [customerName, setCustomerName] = useState("");
+  const [customerEmail, setCustomerEmail] = useState("");
 
+  // Load Midtrans Snap script
+  useEffect(() => {
+    // Cek apakah script sudah dimuat
+    if (!document.getElementById("midtrans-script")) {
+      const script = document.createElement("script");
+      script.id = "midtrans-script";
+      script.src = "https://app.sandbox.midtrans.com/snap/snap.js";
+      script.setAttribute("data-client-key", "MIDTRANS_CLIENT_KEY");
+      script.async = true;
+
+      document.body.appendChild(script);
+    }
+
+    return () => {
+      // Cleanup jika diperlukan
+      const script = document.getElementById("midtrans-script");
+      if (script) {
+        // script.remove(); // Uncomment jika ingin remove script saat unmount
+      }
+    };
+  }, []);
+
+  // Fungsi format price tetap sama
   const formatPrice = useCallback((price: number) => {
-
     return new Intl.NumberFormat("id-ID", {
       style: "currency",
       currency: "IDR",
       minimumFractionDigits: 0,
-    }).format(price)
+    }).format(price);
+  }, []);
 
-  }, [])
+  // Update fungsi handlePayment untuk menggunakan Midtrans
+  // Update fungsi handlePayment untuk menggunakan API Routes
+const handlePayment = useCallback(async () => {
+  try {
+    setIsProcessing(true);
 
-// Di dalam komponen CheckoutPage, tambahkan state untuk dialog
-const [isDialogOpen, setIsDialogOpen] = useState(false)
+    // Data yang akan dikirim ke API
+    const paymentData = {
+      product,
+      productType,
+      topupOption,
+      paymentMethod,
+      userId,
+      customerName,
+      customerEmail
+    };
 
-// Modifikasi fungsi handlePayment
-const handlePayment = useCallback(() => {
-  setIsProcessing(true)
-  
-  // Simulasi proses pembayaran
-  setTimeout(() => {
-    setIsProcessing(false)
-    setIsDialogOpen(true) // Buka dialog konfirmasi
-  }, 1000)
-}, [])
+    // Panggil API Routes Next.js
+    const response = await fetch("/api/midtrans/create-transaction", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(paymentData),
+    });
 
+    const data: TransactionResponse = await response.json();
+
+    if (data.success && data.token) {
+      // Jalankan Midtrans Snap dengan token
+      window.snap?.pay(data.token, {
+        onSuccess: (result) => {
+          console.log("Payment success:", result);
+          alert("Pembayaran berhasil!");
+          onBack();
+        },
+        onPending: (result) => {
+          console.log("Payment pending:", result);
+          alert("Pembayaran dalam proses. Silakan cek status pembayaran Anda.");
+        },
+        onError: (result) => {
+          console.error("Payment error:", result);
+          alert("Pembayaran gagal. Silakan coba lagi.");
+        },
+        onClose: () => {
+          console.log("Customer closed the popup without finishing the payment");
+          setIsProcessing(false);
+        },
+      });
+    } else {
+      throw new Error(data.message || "Failed to create transaction");
+    }
+  } catch (error) {
+    console.error("Error processing payment:", error);
+    alert("Terjadi kesalahan saat memproses pembayaran. Silakan coba lagi.");
+    setIsProcessing(false);
+  }
+}, [product, productType, topupOption, paymentMethod, userId, customerName, customerEmail, onBack]);
   // Get the appropriate icon based on product type
   const getProductIcon = useCallback(() => {
 
@@ -228,54 +184,9 @@ const handlePayment = useCallback(() => {
   }, [productType])
 
 
-
-
-// Fungsi untuk mengirim ke WhatsApp
-const sendToWhatsApp = useCallback(() => {
-  // Nomor WhatsApp bisnis Anda
-  const whatsappNumber = "6282322575578" // Ganti dengan nomor bisnis WhatsApp Anda
   
-  // Menyusun pesan untuk WhatsApp
-  const message = `*PESANAN BARU*
-  
-*Detail Produk:*
-Nama: ${product.name}
-Paket: ${topupOption.name}
-Harga: ${formatPrice(topupOption.price)}
 
-*Data Pelanggan:*
-${getUserIdLabel()}: ${userId}
-
-*Metode Pembayaran:*
-${paymentMethod.name}${selectedPaymentOption && paymentMethod.options ? 
-  ` - ${paymentMethod.options.find(o => o.id === selectedPaymentOption)?.name}` : 
-  ''}
-
-*Total Pembayaran:*
-Subtotal: ${formatPrice(topupOption.price)}
-Biaya Admin: ${formatPrice(2000)}
-Total: ${formatPrice(topupOption.price + 2000)}
-
-Terima kasih telah berbelanja di toko kami!`
-
-  // Encode pesan untuk URL
-  const encodedMessage = encodeURIComponent(message)
-  
-  // Buat URL WhatsApp
-  const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${encodedMessage}`
-  
-  // Tutup dialog
-  setIsDialogOpen(false)
-  
-  // Redirect ke WhatsApp
-  window.open(whatsappUrl, '_blank')
-}, [product, topupOption, paymentMethod, userId, selectedPaymentOption, formatPrice, getUserIdLabel])
-
-// Tambahkan komponen Dialog di bawah return statement di akhir komponen
-// ...
-
-
-
+  // Tambahkan form untuk data customer di bagian Order Details
   return (
     <div className="container px-4 py-6">
       <Button variant="ghost" onClick={onBack} className="mb-4">
@@ -291,6 +202,7 @@ Terima kasih telah berbelanja di toko kami!`
             <h2 className="text-lg font-medium mb-4">Order Details</h2>
             <div className="space-y-3">
               <div className="flex items-center gap-4">
+                {/* Informasi produk seperti sebelumnya */}
                 {product.image ? (
                   <div className="relative h-16 w-16 overflow-hidden rounded-lg">
                     <Image
@@ -300,7 +212,6 @@ Terima kasih telah berbelanja di toko kami!`
                       className="object-cover"
                       sizes="64px"
                     />
-
                   </div>
                 ) : (
                   <div
@@ -323,109 +234,60 @@ Terima kasih telah berbelanja di toko kami!`
             </div>
           </div>
 
-          <div className="rounded-lg border bg-card p-6">
-            <h2 className="text-lg font-medium mb-4">Payment Method: {paymentMethod.name}</h2>
-
-            {paymentMethod.type === "card" && (
-              <div className="space-y-4">
-                <div>
-                  <label htmlFor="card-number" className="text-sm font-medium">
-                    Card Number
-                  </label>
-                  <Input
-                    id="card-number"
-                    placeholder="1234 5678 9012 3456"
-                    value={cardNumber}
-                    onChange={(e) => setCardNumber(e.target.value)}
-                  />
-                </div>
-                <div>
-                  <label htmlFor="card-name" className="text-sm font-medium">
-                    Cardholder Name
-                  </label>
-                  <Input
-                    id="card-name"
-                    placeholder="John Doe"
-                    value={cardName}
-                    onChange={(e) => setCardName(e.target.value)}
-                  />
-                </div>
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="card-expiry" className="text-sm font-medium">
-                      Expiry Date
-                    </label>
-                    <Input
-                      id="card-expiry"
-                      placeholder="MM/YY"
-                      value={cardExpiry}
-                      onChange={(e) => setCardExpiry(e.target.value)}
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="card-cvv" className="text-sm font-medium">
-                      CVV
-                    </label>
-                    <Input
-                      id="card-cvv"
-                      placeholder="123"
-                      value={cardCvv}
-                      onChange={(e) => setCardCvv(e.target.value)}
-                    />
-                  </div>
-                </div>
-              </div>
-            )}
-
-            {paymentMethod.type === "ewallet" && paymentMethod.options && (
-              <div className="space-y-4">
-                <RadioGroup value={selectedPaymentOption || ""} onValueChange={setSelectedPaymentOption}>
-                  <div className="grid gap-3">
-                    {paymentMethod.options.map((option) => (
-
-                      <PaymentOption
-                        key={option.id}
-                        option={option}
-                        isSelected={selectedPaymentOption === option.id}
-                        onClick={() => setSelectedPaymentOption(option.id)}
-                        icon={Wallet}
-                      />
-                    ))}
-                  </div>
-                </RadioGroup>
-              </div>
-            )}
-
-            {paymentMethod.type === "store" && paymentMethod.options && (
-              <div className="space-y-4">
-                <RadioGroup value={selectedPaymentOption || ""} onValueChange={setSelectedPaymentOption}>
-                  <div className="grid gap-3">
-                    {paymentMethod.options.map((option) => (
-                      <PaymentOption
-                        key={option.id}
-                        option={option}
-                        isSelected={selectedPaymentOption === option.id}
-                        onClick={() => setSelectedPaymentOption(option.id)}
-                        icon={Store}
-                      />
-                    ))}
-                  </div>
-                </RadioGroup>
-                <PaymentInstructions
-                  type="store"
-                  selectedOption={selectedPaymentOption}
-                  options={paymentMethod.options}
+          {/* Tambahkan form untuk informasi pelanggan */}
+          <div className="rounded-lg border bg-card p-6 mb-6">
+            <h2 className="text-lg font-medium mb-4">Customer Information</h2>
+            <div className="space-y-4">
+              <div>
+                <label htmlFor="customer-name" className="text-sm font-medium">
+                  Name
+                </label>
+                <Input
+                  id="customer-name"
+                  placeholder="Your Name"
+                  value={customerName}
+                  onChange={(e) => setCustomerName(e.target.value)}
                 />
-
               </div>
-            )}
-
-            {paymentMethod.type === "qris" && (
-              <div className="space-y-4">
-                <QRCode />
-                <PaymentInstructions type="qris" selectedOption={null} />
+              <div>
+                <label htmlFor="customer-email" className="text-sm font-medium">
+                  Email
+                </label>
+                <Input
+                  id="customer-email"
+                  type="email"
+                  placeholder="your.email@example.com"
+                  value={customerEmail}
+                  onChange={(e) => setCustomerEmail(e.target.value)}
+                />
               </div>
-            )}
+            </div>
+          </div>
+
+          {/* Metode pembayaran - hanya tampilkan sebagai informasi karena akan menggunakan Midtrans */}
+          <div className="rounded-lg border bg-card p-6">
+            <h2 className="text-lg font-medium mb-4">Payment Method</h2>
+            <p className="text-sm text-muted-foreground mb-4">
+              You will be redirected to Midtrans secure payment page to complete your payment.
+            </p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div className="flex flex-col items-center p-3 border rounded-lg">
+                <Image src="/placeholder.svg?height=40&width=40" alt="Credit Card" width={40} height={40} />
+                <span className="text-xs mt-2">Credit Card</span>
+              </div>
+              <div className="flex flex-col items-center p-3 border rounded-lg">
+                <Image src="/placeholder.svg?height=40&width=40" alt="Bank Transfer" width={40} height={40} />
+                <span className="text-xs mt-2">Bank Transfer</span>
+              </div>
+              <div className="flex flex-col items-center p-3 border rounded-lg">
+                <Image src="/placeholder.svg?height=40&width=40" alt="E-Wallet" width={40} height={40} />
+                <span className="text-xs mt-2">E-Wallet</span>
+              </div>
+              <div className="flex flex-col items-center p-3 border rounded-lg">
+                <Image src="/placeholder.svg?height=40&width=40" alt="Convenience Store" width={40} height={40} />
+                <span className="text-xs mt-2">Retail Outlet</span>
+              </div>
+            </div>
           </div>
         </div>
 
@@ -438,16 +300,14 @@ Terima kasih telah berbelanja di toko kami!`
                 <span>{product.name}</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-muted-foreground">{productType === "data" ? "Package" : "Top-Up Amount"}</span>
+                <span className="text-muted-foreground">
+                  {productType === "data" ? "Package" : "Top-Up Amount"}
+                </span>
                 <span>{topupOption.name}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-muted-foreground">{getUserIdLabel()}</span>
                 <span>{userId}</span>
-              </div>
-              <div className="flex justify-between">
-                <span className="text-muted-foreground">Payment Method</span>
-                <span>{paymentMethod.name}</span>
               </div>
               <div className="border-t my-3"></div>
               <div className="flex justify-between">
@@ -468,12 +328,12 @@ Terima kasih telah berbelanja di toko kami!`
               className="mt-6 w-full"
               disabled={
                 isProcessing ||
-                (paymentMethod.type === "card" && (!cardNumber || !cardName || !cardExpiry || !cardCvv)) ||
-                ((paymentMethod.type === "ewallet" || paymentMethod.type === "store") && !selectedPaymentOption)
+                !customerName ||
+                !customerEmail
               }
               onClick={handlePayment}
             >
-              {isProcessing ? "Processing..." : "Pay Now"}
+              {isProcessing ? "Processing..." : "Pay Now with Midtrans"}
             </Button>
             <p className="mt-4 text-center text-xs text-muted-foreground">
               By proceeding with the payment, you agree to our{" "}
@@ -484,34 +344,6 @@ Terima kasih telah berbelanja di toko kami!`
           </div>
         </div>
       </div>
-
-        <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Konfirmasi Pesanan</DialogTitle>
-          <DialogDescription>
-            Pesanan Anda akan diteruskan ke WhatsApp untuk menyelesaikan proses pembelian.
-          </DialogDescription>
-        </DialogHeader>
-        <div className="space-y-2 py-2">
-          <div className="rounded-lg bg-muted p-3">
-            <div className="space-y-1">
-              <h4 className="font-medium">{product.name} - {topupOption.name}</h4>
-              <p className="text-sm">Total: {formatPrice(topupOption.price + 2000)}</p>
-            </div>
-          </div>
-        </div>
-        <DialogFooter>
-          <Button variant="outline" onClick={() => setIsDialogOpen(false)}>
-            Batal
-          </Button>
-          <Button onClick={sendToWhatsApp}>
-            Lanjutkan ke WhatsApp
-          </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
-        </div>
-  )
+    </div>
+  );
 }
-

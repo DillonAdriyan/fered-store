@@ -38,218 +38,12 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import BannerCarousel from "./banner-carousel"
 import CheckoutPage from "./checkout-page"
 import ProductsPage from "./products-page"
+import { popularGames, topupOptions,   topupOptionsFreeFire, topupOptionsMobileLegends, ewalletOptions, dataProviders, pulsaProviders, ewalletTopupOptions, dataPackageOptions, pulsaOptions, productCategories, gameCategories } from "@/lib/data/products";
+// Impor data produk yang terpusat
 
-// Product categories
-const productCategories = [
-  { id: "games", name: "Games", icon: GameController, color: "bg-purple-500" },
-  { id: "ewallet", name: "E-Wallet", icon: Wallet, color: "bg-blue-500" },
-  { id: "data", name: "Data Packages", icon: Wifi, color: "bg-green-500" },
-  { id: "pulsa", name: "Pulsa", icon: Smartphone, color: "bg-orange-500" },
-]
 
-// Game categories
-const gameCategories = [
-  { id: "all", name: "All Games" },
-  { id: "moba", name: "MOBA" },
-  { id: "fps", name: "FPS" },
-  { id: "rpg", name: "RPG" },
-  { id: "battle-royale", name: "Battle Royale" },
-  { id: "mmorpg", name: "MMORPG" },
-]
 
-// Popular games
-const popularGames = [
-  {
-    id: 1,
-    name: "Mobile Legends",
-    image: "/logo/mlbb.webp",
-    category: "MOBA",
-  },
-  {
-    id: 2,
-    name: "PUBG Mobile",
-    image: "/logo/pubg.webp",
-    category: "Battle Royale",
-  },
-  {
-    id: 3,
-    name: "Genshin Impact",
-    image: "/logo/gensin.webp",
-    category: "RPG",
-  },
-  {
-    id: 4,
-    name: "Free Fire",
-    image: "/logo/ff.webp",
-    category: "Battle Royale",
-  },
-  {
-    id: 5,
-    name: "Call of Duty Mobile",
-    image: "/logo/codm.webp",
-    category: "FPS",
-  },
-  {
-    id: 6,
-    name: "Valorant",
-    image: "/logo/valorant.webp",
-    category: "FPS",
-  },
-]
 
-// E-Wallet options
-const ewalletOptions = [
-  {
-    id: 1,
-    name: "GoPay",
-    image: "/logo/gopay.webp",
-    color: "blue-500",
-    icon: Wallet,
-  },
-  {
-    id: 2,
-    name: "OVO",
-    image: "/logo/ovo.webp",
-    color: "purple-500",
-    icon: Wallet,
-  },
-  {
-    id: 3,
-    name: "DANA",
-    image: "/logo/dana.webp",
-    color: "blue-400",
-    icon: Wallet,
-  },
-  {
-    id: 4,
-    name: "LinkAja",
-    image: "/logo/linkaja.webp",
-    color: "red-500",
-    icon: Wallet,
-  },
-  {
-    id: 5,
-    name: "ShopeePay",
-    image: "/logo/shopepay.webp",
-    color: "orange-500",
-    icon: Wallet,
-  },
-]
-
-// Data package providers
-const dataProviders = [
-  {
-    id: 1,
-    name: "Telkomsel",
-    image: "/logo/telkomsel.webp",
-    color: "red-500",
-    icon: Wifi,
-  },
-  {
-    id: 2,
-    name: "XL",
-    image: "/logo/xl.webp",
-    color: "blue-500",
-    icon: Wifi,
-  },
-  {
-    id: 3,
-    name: "Indosat",
-    image: "/logo/indosat.webp",
-    color: "yellow-500",
-    icon: Wifi,
-  },
-  {
-    id: 4,
-    name: "Tri",
-    image: "/logo/tri.webp",
-    color: "purple-500",
-    icon: Wifi,
-  },
-  {
-    id: 5,
-    name: "Smartfren",
-    image: "/logo/smartfren.webp",
-    color: "red-600",
-    icon: Wifi,
-  },
-]
-
-// Pulsa providers
-const pulsaProviders = [
-  {
-    id: 1,
-    name: "Telkomsel",
-    image: "/logo/telkomsel.webp",
-    color: "red-500",
-    icon: Smartphone,
-  },
-  {
-    id: 2,
-    name: "XL",
-    image: "/logo/xl.webp",
-    color: "blue-500",
-    icon: Smartphone,
-  },
-  {
-    id: 3,
-    name: "Indosat",
-    image: "/logo/indosat.webp",
-    color: "yellow-500",
-    icon: Smartphone,
-  },
-  {
-    id: 4,
-    name: "Tri",
-    image: "/logo/tri.webp",
-    color: "purple-500",
-    icon: Smartphone,
-  },
-  {
-    id: 5,
-    name: "Smartfren",
-    image: "/logo/smartfren.webp",
-    color: "red-600",
-    icon: Smartphone,
-  },
-]
-
-// Top-up options
-const topupOptions = [
-  { id: 1, name: "100 Diamonds", price: 20000, discount: 0 },
-  { id: 2, name: "300 Diamonds", price: 50000, discount: 5 },
-  { id: 3, name: "500 Diamonds", price: 80000, discount: 10 },
-  { id: 4, name: "1000 Diamonds", price: 150000, discount: 15 },
-  { id: 5, name: "2000 Diamonds", price: 290000, discount: 20 },
-]
-
-// E-Wallet top-up options
-const ewalletTopupOptions = [
-  { id: 1, name: "Rp 10.000", price: 11000, discount: 0 },
-  { id: 2, name: "Rp 20.000", price: 21000, discount: 0 },
-  { id: 3, name: "Rp 50.000", price: 51000, discount: 2 },
-  { id: 4, name: "Rp 100.000", price: 101000, discount: 3 },
-  { id: 5, name: "Rp 200.000", price: 201000, discount: 5 },
-  { id: 6, name: "Rp 500.000", price: 500000, discount: 7 },
-]
-
-// Data package options
-const dataPackageOptions = [
-  { id: 1, name: "1GB - 1 Day", price: 10000, discount: 0, description: "1GB internet for 1 day" },
-  { id: 2, name: "3GB - 3 Days", price: 15000, discount: 0, description: "3GB internet for 3 days" },
-  { id: 3, name: "5GB - 7 Days", price: 35000, discount: 5, description: "5GB internet for 7 days" },
-  { id: 4, name: "10GB - 30 Days", price: 60000, discount: 10, description: "10GB internet for 30 days" },
-  { id: 5, name: "25GB - 30 Days", price: 100000, discount: 15, description: "25GB internet for 30 days" },
-]
-
-// Pulsa options
-const pulsaOptions = [
-  { id: 1, name: "Rp 5.000", price: 6000, discount: 0 },
-  { id: 2, name: "Rp 10.000", price: 11000, discount: 0 },
-  { id: 3, name: "Rp 20.000", price: 21000, discount: 0 },
-  { id: 4, name: "Rp 50.000", price: 50500, discount: 1 },
-  { id: 5, name: "Rp 100.000", price: 100000, discount: 2 },
-]
 
 // Payment methods
 const paymentMethods = [
@@ -321,7 +115,7 @@ export default function GameTopupStore() {
   const [activeProductCategory, setActiveProductCategory] = useState("games")
   const [activeTab, setActiveTab] = useState("all")
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
-  const [selectedGame, setSelectedGame] = useState<number | null>(null)
+  const [selectedGame, setSelectedGame] = useState<string | null>(null);
   const [selectedEwallet, setSelectedEwallet] = useState<number | null>(null)
   const [selectedDataProvider, setSelectedDataProvider] = useState<number | null>(null)
   const [selectedPulsaProvider, setSelectedPulsaProvider] = useState<number | null>(null)
@@ -356,7 +150,21 @@ export default function GameTopupStore() {
     setSelectedPulsaProvider(null)
     setCheckoutData(null)
   }
+  const getTopupOptionsForGame = () => {
+    const selectedGameData = popularGames.find((game) => game.id === selectedGame);
+    if (!selectedGameData) return [];
 
+    // Misal, jika id game adalah "free-fire", gunakan topupOptionsFreeFire
+    if (selectedGameData.id === "free-fire") {
+      return topupOptionsFreeFire;
+    }
+    // Jika game adalah Mobile Legends
+    if (selectedGameData.id === "mobile-legends") {
+      return topupOptionsMobileLegends;
+    }
+    // Default (bisa diganti sesuai kebutuhan)
+    return topupOptions;
+  };
   // Determine which product is selected
   const isProductSelected =
     selectedGame !== null || selectedEwallet !== null || selectedDataProvider !== null || selectedPulsaProvider !== null
@@ -383,7 +191,7 @@ export default function GameTopupStore() {
                     </Link>
                   </div>
                   <nav className="grid gap-2 p-2">
-                    {productCategories.map((category) => (
+                    {productCategories?.map((category) => (
                       <Link
                         key={category.id}
                         href="#"
@@ -463,7 +271,7 @@ export default function GameTopupStore() {
             </SidebarHeader>
             <SidebarContent>
               <SidebarMenu>
-                {productCategories.map((category) => (
+                {productCategories?.map((category) => (
                   <SidebarMenuItem key={category.id}>
                     <SidebarMenuButton
                       isActive={activeProductCategory === category.id}
@@ -582,7 +390,7 @@ export default function GameTopupStore() {
                   <div className="overflow-x-auto pb-2">
                     <Tabs value={activeProductCategory} onValueChange={setActiveProductCategory} className="w-full">
                       <TabsList className="inline-flex w-max">
-                        {productCategories.map((category) => (
+                        {productCategories?.map((category) => (
                           <TabsTrigger key={category.id} value={category.id}>
                             <category.icon className="mr-2 h-4 w-4" />
                             {category.name}
@@ -632,6 +440,20 @@ export default function GameTopupStore() {
                     ))}
                   </div>
                 </section>
+                {/* Jika game dipilih, tampilkan halaman produk dengan opsi top-up yang sesuai */}
+{selectedGame && (
+  <ProductsPage
+    product={popularGames.find((g) => g.id === selectedGame)!}
+    productType="game"
+    topupOptions={getTopupOptionsForGame()} // pastikan di sini dikirim data yang tepat
+    paymentMethods={paymentMethods}
+    onBack={() => setSelectedGame(null)}
+    onProceedToCheckout={(product, option, payment, userId) =>
+      handleProceedToCheckout(product, "game", option, payment, userId)
+    }
+  />
+)}
+
               </>
             )}
 
