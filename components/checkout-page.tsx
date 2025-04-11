@@ -1,6 +1,11 @@
-// Tambahkan import berikut
-import { useEffect } from "react";
 
+// Tambahkan import berikut
+import { useEffect, useState, useCallback } from "react";
+import { Button } from "@/components/ui/button";
+import Image from "next/image"
+import Link from "next/link"
+import { Input } from "@/components/ui/input"
+import { ChevronDown } from 'lucide-react'
 // Di dalam file checkout-page.tsx
 
 // Tambahkan interface untuk response dari backend
@@ -79,11 +84,11 @@ export default function CheckoutPage({
 
   // Update fungsi handlePayment untuk menggunakan Midtrans
   // Update fungsi handlePayment untuk menggunakan API Routes
-const handlePayment = useCallback(async () => {
+  const handlePayment = useCallback(async () => {
   try {
     setIsProcessing(true);
 
-    // Data yang akan dikirim ke API
+    // Data untuk transaksi dan dikirim ke backend Midtrans, dll.
     const paymentData = {
       product,
       productType,
@@ -91,15 +96,13 @@ const handlePayment = useCallback(async () => {
       paymentMethod,
       userId,
       customerName,
-      customerEmail
+      customerEmail,
     };
 
-    // Panggil API Routes Next.js
+    // Panggil API Route untuk membuat transaksi Midtrans
     const response = await fetch("/api/midtrans/create-transaction", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(paymentData),
     });
 
@@ -108,9 +111,24 @@ const handlePayment = useCallback(async () => {
     if (data.success && data.token) {
       // Jalankan Midtrans Snap dengan token
       window.snap?.pay(data.token, {
-        onSuccess: (result) => {
+        onSuccess: async (result) => {
           console.log("Payment success:", result);
           alert("Pembayaran berhasil!");
+
+          // Panggil API untuk mengirim pesan WhatsApp
+          await fetch("/api/send-whatsapp-message", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              name: customerName,
+              email: customerEmail,
+              gameId: product.id, // Pastikan product.id sesuai dengan data game
+              zoneId: product.id === "mobile-legends" ? userIdZone /* misalnya zone id tersimpan di sini */ : "",
+              productName: product.name,
+            }),
+          });
+
+          // Simpan histori pesanan jika diperlukan, dsb.
           onBack();
         },
         onPending: (result) => {
@@ -135,6 +153,8 @@ const handlePayment = useCallback(async () => {
     setIsProcessing(false);
   }
 }, [product, productType, topupOption, paymentMethod, userId, customerName, customerEmail, onBack]);
+
+
   // Get the appropriate icon based on product type
   const getProductIcon = useCallback(() => {
 

@@ -334,7 +334,7 @@ export default function GameTopupStore() {
               <ProductsPage
                 product={popularGames.find((g) => g.id === selectedGame)!}
                 productType="game"
-                topupOptions={topupOptions}
+                topupOptions={getTopupOptionsForGame()}
                 paymentMethods={paymentMethods}
                 onBack={handleBackToHome}
                 onProceedToCheckout={(product, option, payment, userId) =>
