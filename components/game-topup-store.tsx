@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import {
   Bell,
   CreditCard,
@@ -41,7 +41,7 @@ import ProductsPage from "./products-page"
 import { popularGames, topupOptions,   topupOptionsFreeFire, topupOptionsMobileLegends, ewalletOptions, dataProviders, pulsaProviders, ewalletTopupOptions, dataPackageOptions, pulsaOptions, productCategories, gameCategories } from "@/lib/data/products";
 // Impor data produk yang terpusat
 
-
+import { ScrollToTop } from "./scroll-to-top"
 
 
 
@@ -126,7 +126,12 @@ export default function GameTopupStore() {
     paymentMethod: any
     userId: string
   } | null>(null)
-
+  
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [selectedGame, selectedEwallet,
+  selectedDataProvider, selectedPulsaProvider,
+  checkoutData])
   const handleProceedToCheckout = (
     product: any,
     productType: string,
@@ -171,7 +176,9 @@ export default function GameTopupStore() {
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen flex-col">
+     <ScrollToTop />
+      <div className="flex min-h-screen flex-col
+      max-w-full">
         {/* Navbar */}
         <header className="sticky top-0 z-40 border-b bg-background">
           <div className="container flex h-16 items-center justify-between px-4">
@@ -320,7 +327,7 @@ export default function GameTopupStore() {
           </Sidebar>
 
           {/* Main Content */}
-          <main className="flex-1">
+          <main className="flex-1 max-w-full">
             {checkoutData ? (
               <CheckoutPage
                 product={checkoutData.product}
@@ -377,7 +384,8 @@ export default function GameTopupStore() {
             ) : (
               <>
                 {/* Hero Banner Carousel */}
-                <section className="relative">
+                <section className="relative
+                max-w-full">
                   <div className="container px-4 py-6">
                     <div className="overflow-hidden rounded-xl">
                       <BannerCarousel banners={banners} />
@@ -424,16 +432,31 @@ export default function GameTopupStore() {
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
                     {popularGames.map((game) => (
                       <div key={game.id} className="group cursor-pointer" onClick={() => setSelectedGame(game.id)}>
-                        <div className="aspect-square overflow-hidden rounded-xl bg-muted relative p-8">
+                        <div
+                        className="aspect-square
+                        overflow-hidden rounded-xl
+                        bg-muted flex items-center
+                        justify-center p-2
+                        flex-wrap h-56 max-w-full">
+                         <div
+                         className="rounded-xl
+                         w-36 h-36 overflow-hidden
+                        ">
                           <Image
                             src={game.image || "/placeholder.svg"}
                             alt={game.name}
-                            fill
-                            className="object-contain transition-transform group-hover:scale-105 w-24 h-auto"
+                            width="240"
+                            height="240"
+                            className="object-cover transition-transform
+                            group-hover:scale-105
+                            mx-auto"
                           />
+                         </div>
+                          <h3
+                          className="font-medium
+                          mt-1">{game.name}</h3>
                         </div>
                         <div className="mt-2">
-                          <h3 className="font-medium line-clamp-1">{game.name}</h3>
                           <p className="text-xs text-muted-foreground">{game.category}</p>
                         </div>
                       </div>
