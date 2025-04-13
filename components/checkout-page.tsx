@@ -290,22 +290,64 @@ export default function CheckoutPage({
             <p className="text-sm text-muted-foreground mb-4">
               You will be redirected to Midtrans secure payment page to complete your payment.
             </p>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              <div className="flex flex-col items-center p-3 border rounded-lg">
-                <Image src="/placeholder.svg?height=40&width=40" alt="Credit Card" width={40} height={40} />
-                <span className="text-xs mt-2">Credit Card</span>
+             <div className="grid
+              grid-cols-2 md:grid-cols-4
+              gap-4">
+              <div className="border
+              rounded-lg p-2 flex flex-col
+              justify-center items-center">
+              <div className="
+               mx-auto h-8 mt-1">
+                <Image src="/logo/creditcard.png"
+                alt="Convenience Store" width={180}
+                height={40} />
+
               </div>
-              <div className="flex flex-col items-center p-3 border rounded-lg">
-                <Image src="/placeholder.svg?height=40&width=40" alt="Bank Transfer" width={40} height={40} />
-                <span className="text-xs mt-2">Bank Transfer</span>
+                <span className="text-xs mt-3">Credit
+                Card</span>
               </div>
-              <div className="flex flex-col items-center p-3 border rounded-lg">
-                <Image src="/placeholder.svg?height=40&width=40" alt="E-Wallet" width={40} height={40} />
-                <span className="text-xs mt-2">E-Wallet</span>
+              <div className="border
+              rounded-lg p-2 flex flex-col
+              justify-center items-center">
+              <div className="grid grid-cols-3
+              gap-2 mx-auto h-8 mt-4">
+                <Image src="/logo/bri.png"
+                alt="Bank Transfer" width={40} height={40} />
+                <Image src="/logo/bni.png"
+                alt="Bank Transfer" width={40} height={40}
+                />
+                <Image src="/logo/bca.png"
+                alt="Bank Transfer" width={40} height={40}
+                />
               </div>
-              <div className="flex flex-col items-center p-3 border rounded-lg">
-                <Image src="/placeholder.svg?height=40&width=40" alt="Convenience Store" width={40} height={40} />
-                <span className="text-xs mt-2">Retail Outlet</span>
+                <span className="text-xs">Bank
+                Transfer</span>
+              </div>
+              <div className="border
+              rounded-lg p-2 flex flex-col
+              justify-center items-center">
+              <div className="grid grid-cols-2
+              gap-2 mx-auto h-8 mt-1">
+                <Image src="/logo/goPay.png"
+                alt="E-Wallet" width={40} height={40} />
+                <Image src="/logo/dana.webp"
+                alt="E-Wallet" width={40} height={40} />
+                <Image src="/logo/shopepay.webp"
+                alt="E-Wallet" width={40} height={40} />
+                <Image src="/logo/ovo2.png"
+                alt="E-Wallet" width={40} height={40} />
+              </div>
+                <span className="text-xs">E-Wallet</span>
+              </div>
+              <div className="border
+              rounded-lg p-2 flex flex-col
+              justify-center items-center">
+              <div className="grid grid-cols-2
+              gap-2 mx-auto h-8 mt-4">
+                <Image src="/logo/alfa.png" alt="Convenience Store" width={40} height={40} />
+                <Image src="/logo/indomaret.png" alt="Convenience Store" width={40} height={40} />
+              </div>
+                <span className="text-xs">Retail Outlet</span>
               </div>
             </div>
           </div>

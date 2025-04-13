@@ -38,7 +38,9 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import BannerCarousel from "./banner-carousel"
 import CheckoutPage from "./checkout-page"
 import ProductsPage from "./products-page"
+import PaymentGrid from "./payment-method"
 import { popularGames, topupOptions,   topupOptionsFreeFire, topupOptionsMobileLegends, ewalletOptions, dataProviders, pulsaProviders, ewalletTopupOptions, dataPackageOptions, pulsaOptions, productCategories, gameCategories } from "@/lib/data/products";
+import { payment } from "@lib/data/payments"
 // Impor data produk yang terpusat
 
 import { ScrollToTop } from "./scroll-to-top"
@@ -436,25 +438,33 @@ export default function GameTopupStore() {
                         className="aspect-square
                         overflow-hidden rounded-xl
                         bg-muted flex items-center
+                        hover:bg-blue-400
+                        hover:border-2
+                        border-blue-700
+                        transition
+                        duration-300
                         justify-center p-2
                         flex-wrap h-56 max-w-full">
                          <div
                          className="rounded-xl
-                         w-36 h-36 overflow-hidden
+                         w-38 h-38 overflow-hidden
                         ">
                           <Image
                             src={game.image || "/placeholder.svg"}
                             alt={game.name}
-                            width="240"
-                            height="240"
-                            className="object-cover transition-transform
-                            group-hover:scale-105
+                            width="200"
+                            height="200"
+                            className="object-cover
+                            group-hover:scale-110
+                            duration-500
+                            transition
                             mx-auto"
                           />
                          </div>
                           <h3
                           className="font-medium
-                          mt-1">{game.name}</h3>
+                          mt-1
+                          group-hover:text-blue-800">{game.name}</h3>
                         </div>
                         <div className="mt-2">
                           <p className="text-xs text-muted-foreground">{game.category}</p>
@@ -763,15 +773,9 @@ export default function GameTopupStore() {
           </div>
           <div>
             <h3 className="font-bold mb-4">Payment Methods</h3>
-            <div className="grid grid-cols-3 gap-2">
-              {Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="aspect-[3/2] rounded bg-background p-2 flex items-center justify-center">
-                  <CreditCardIcon className="h-6 w-6 text-muted-foreground" />
-                </div>
-              ))}
+             <PaymentGrid />
             </div>
           </div>
-        </div>
         <div className="mt-8 border-t pt-6 text-center text-sm text-muted-foreground">
           <p>© {new Date().getFullYear()} FeredStore. All rights reserved.</p>
         </div>
